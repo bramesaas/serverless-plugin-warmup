@@ -205,7 +205,7 @@ export const warmUp = async (event, context) => {
 
   /** Write warm up file */
   await fs.mkdir(handlerFolder, { recursive: true });
-  await fs.writeFile(path.join(handlerFolder, 'index.mjs'), warmUpFunction);
+  await fs.writeFile(path.join(handlerFolder, 'index.js'), warmUpFunction);
 
   if (tracing) {
     await execAsync('npm init -y', { cwd: handlerFolder });
@@ -225,7 +225,7 @@ function addWarmUpFunctionToService(service, warmerName, warmerConfig) {
     memorySize: warmerConfig.memorySize,
     name: warmerConfig.name,
     ...(warmerConfig.architecture ? { architecture: warmerConfig.architecture } : {}),
-    runtime: 'nodejs20.x',
+    runtime: 'nodejs22.x',
     package: warmerConfig.package,
     timeout: warmerConfig.timeout,
     ...(Object.keys(warmerConfig.environment).length
